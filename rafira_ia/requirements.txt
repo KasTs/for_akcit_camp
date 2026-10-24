@@ -1,0 +1,12 @@
+fastapi==0.115.6
+# anyio: transitivo via starlette/fastapi, fixado para não deixar o pip
+# resolver a 4.15.1 — essa versão depreca o alias anyio.abc.BlockingPortal
+# que o starlette==0.41.3 ainda usa, e isso faz todo "pytest -v" emitir um
+# DeprecationWarning. 4.9.0 é a mais recente sem o warning.
+anyio==4.9.0
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+openai==1.59.6
+assemblyai==0.35.1
+python-dotenv==1.0.1

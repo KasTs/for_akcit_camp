@@ -1,0 +1,20 @@
+services:
+  api:
+    build: .
+    container_name: rafira_ia
+    ports:
+      - "4000:4000"
+    environment:
+      TRANSCRIPTION_MODE: ${TRANSCRIPTION_MODE:-stub}
+      TRANSCRIPTION_STUB_DELAY_SEC: ${TRANSCRIPTION_STUB_DELAY_SEC:-2}
+      BRIEFING_STUB_DELAY_SEC: ${BRIEFING_STUB_DELAY_SEC:-1}
+      TRANSCRIPTION_API_TOKEN: ${TRANSCRIPTION_API_TOKEN:-}
+      ASSEMBLYAI_API_KEY: ${ASSEMBLYAI_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o-mini}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:4000/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
